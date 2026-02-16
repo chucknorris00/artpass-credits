@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Estudios", href: "#studios" },
   { label: "Planes", href: "#pricing" },
   { label: "Cómo funciona", href: "#how-it-works" },
+  { label: "Dashboard", href: "/dashboard", isRoute: true },
 ];
 
 export function Header() {
@@ -26,15 +27,25 @@ export function Header() {
 
           {/* Desktop navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium font-body"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              (link as any).isRoute ? (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors font-medium font-body"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors font-medium font-body"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </nav>
 
           {/* Desktop CTA */}
@@ -61,16 +72,27 @@ export function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-border animate-fade-in">
             <nav className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                (link as any).isRoute ? (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="text-muted-foreground hover:text-foreground transition-colors font-medium py-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
                 <Link to="/auth">
                   <Button variant="ghost" className="w-full justify-center">
