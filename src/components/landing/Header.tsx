@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const navLinks = [
-  { label: "Estudios", href: "#studios" },
+  { label: "Explorar Estudios", href: "/explorar", isRoute: true },
   { label: "Planes", href: "#pricing" },
   { label: "Cómo funciona", href: "#how-it-works" },
 ];
